@@ -1,0 +1,418 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Para mi niña bonita 💗</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    font-family: "Segoe UI", sans-serif;
+    background: linear-gradient(135deg, #ffe4ec, #f8c8dc, #e9b8d0);
+    color: #78334f;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 22px 14px;
+    overflow-x: hidden;
+}
+
+.fondo-corazones {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    overflow: hidden;
+    z-index: 0;
+}
+
+.flotante {
+    position: absolute;
+    bottom: -50px;
+    animation: subir linear forwards;
+    opacity: 0.7;
+}
+
+@keyframes subir {
+    to {
+        transform: translateY(-115vh) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+.tarjeta {
+    width: 100%;
+    max-width: 570px;
+    position: relative;
+    z-index: 1;
+    background: rgba(255, 250, 252, 0.94);
+    border: 1px solid rgba(255,255,255,.9);
+    border-radius: 25px;
+    padding: 34px 25px;
+    text-align: center;
+    box-shadow: 0 15px 45px rgba(126, 47, 83, .18);
+    animation: aparecer 1s ease;
+}
+
+@keyframes aparecer {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.corazon-grande {
+    font-size: 58px;
+    animation: latir 1.3s infinite;
+    display: inline-block;
+}
+
+@keyframes latir {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.15); }
+}
+
+h1 {
+    font-family: Georgia, serif;
+    font-size: clamp(27px, 6vw, 38px);
+    color: #b83e6f;
+    margin: 13px 0;
+}
+
+.subtitulo {
+    color: #bb7390;
+    font-size: 14px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+.carta {
+    background: #fff5f8;
+    border: 1px solid #f4d5e1;
+    border-radius: 17px;
+    padding: 23px 19px;
+    margin: 24px 0;
+    text-align: left;
+    line-height: 1.85;
+    font-size: 15px;
+    white-space: pre-line;
+}
+
+.firma {
+    text-align: right;
+    color: #b83e6f;
+    font-family: Georgia, serif;
+    font-style: italic;
+    font-size: 19px;
+}
+
+button {
+    border: none;
+    border-radius: 30px;
+    padding: 14px 24px;
+    font-size: 15px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: transform .2s, box-shadow .2s;
+    margin: 6px;
+}
+
+button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 7px 17px #d99ab7;
+}
+
+.boton-principal {
+    background: linear-gradient(135deg, #e85d91, #c63772);
+    color: white;
+}
+
+.boton-si {
+    background: #e64f89;
+    color: white;
+}
+
+.boton-no {
+    background: #f4e4eb;
+    color: #99516e;
+}
+
+.pantalla {
+    display: none;
+    animation: aparecer .7s ease;
+}
+
+.pantalla.activa {
+    display: block;
+}
+
+.pregunta {
+    font-family: Georgia, serif;
+    font-size: 27px;
+    line-height: 1.5;
+    color: #b83e6f;
+    margin: 22px 0;
+}
+
+.mensaje-final {
+    font-size: 17px;
+    line-height: 1.8;
+    margin: 20px 0;
+}
+
+.emojis {
+    font-size: 36px;
+    line-height: 1.7;
+}
+
+.nota {
+    font-size: 12px;
+    color: #ba8198;
+    margin-top: 24px;
+}
+
+@media (max-width: 420px) {
+    .tarjeta { padding: 28px 17px; }
+    .carta { padding: 19px 15px; }
+    button { padding: 13px 19px; }
+}
+</style>
+</head>
+
+<body>
+
+<div class="fondo-corazones" id="fondo"></div>
+
+<main class="tarjeta">
+
+    <!-- PANTALLA 1: LA CARTA -->
+    <section id="inicio" class="pantalla activa">
+        <div class="corazon-grande">💗</div>
+        <p class="subtitulo">Un día 15 más contigo</p>
+        <h1>Feliz aniversario, mi niña bonita</h1>
+
+        <p>
+            Un pequeño detalle para recordarte
+            lo muchísimo que te amo. 🥹💕
+        </p>
+
+        <div class="carta" id="textoCarta"></div>
+
+        <button class="boton-principal" onclick="mostrarPregunta()">
+            Presiona aquí, mi amor 💌
+        </button>
+
+        <p class="nota">
+            Hecho con todo mi corazón, especialmente para ti. ♡
+        </p>
+    </section>
+
+    <!-- PANTALLA 2: LA PREGUNTA -->
+    <section id="preguntaPantalla" class="pantalla">
+        <div class="corazon-grande">🥺💗</div>
+        <p class="subtitulo">Tengo una preguntita...</p>
+
+        <div class="pregunta">
+            ¿Te gustaría tener una cita improvisada conmigo, mi amor? 🌷
+        </div>
+
+        <p>
+            No tienes que preparar nada,
+            solo quiero compartir un ratito bonito contigo. 🫶🏻
+        </p>
+
+        <div style="margin-top: 28px;">
+            <button class="boton-si" onclick="responderSi()">
+                ¡Siiii, mi amor! 💖
+            </button>
+
+            <button class="boton-no" onclick="responderNo()">
+                Hoy no, mi cielito 🥺
+            </button>
+        </div>
+    </section>
+
+    <!-- PANTALLA 3: RESPUESTA SÍ -->
+    <section id="finalSi" class="pantalla">
+        <div class="corazon-grande">🥰</div>
+        <h1>¡SABÍA QUE DIRÍAS QUE SÍ! 💗</h1>
+
+        <div class="emojis">😍 💖 🥹 💘 🫶🏻</div>
+
+        <div class="mensaje-final">
+            ¡Ayyyy, mi niña bonita! 🥹💕<br><br>
+
+            Entonces queda oficialmente inaugurada
+            nuestra cita improvisada. No sé todavía
+            qué haremos, pero sí sé algo:
+            <strong>quiero que sea contigo.</strong><br><br>
+
+            Puede ser una salida, una comidita,
+            una caminata o simplemente estar juntitos.
+            Lo importante es seguir creando recuerdos
+            a tu lado. 🌷<br><br>
+
+            Gracias por otro día 15, por tu amor
+            y por hacer tan bonita mi vida.
+            Te volvería a elegir una y mil veces. 💞
+        </div>
+
+        <h2 style="color:#c43e75;">Te amo, mi amor. 💋</h2>
+        <div class="emojis">💗 💕 💓 💝 💗</div>
+    </section>
+
+    <!-- PANTALLA 4: RESPUESTA NO -->
+    <section id="finalNo" class="pantalla">
+        <div class="corazon-grande">🥺💔</div>
+        <h1>Está bien, mi cielito</h1>
+
+        <div class="emojis">🥹 🥺 🩷</div>
+
+        <div class="mensaje-final">
+            Awww, mi niña bonita. 🥺💕<br><br>
+
+            No pasa nada, amorcito.
+            Podemos dejar nuestra cita para otro día
+            que te apetezca y te sientas con ganas.<br><br>
+
+            Lo más importante para mí es que estés
+            feliz y a gusto. No hay prisa, mi vida.
+            Mi invitación seguirá aquí, esperándote
+            con muchos besitos. 😚💗<br><br>
+
+            Gracias por compartir conmigo otro día 15.
+            Te mando un abrazo enorme y todo mi amor. 🫂
+        </div>
+
+        <div class="emojis">🩷 🥹 🫶🏻 🩷</div>
+    </section>
+
+</main>
+
+<script>
+const mensaje = `Mi amorcito hermoso: 💗
+
+¡Feliz día 15, mi vida! 🥹💕
+
+Hoy celebramos otro mes de esta historia tan bonita
+que estamos construyendo juntos. Y aunque quizá
+para el mundo sea un día cualquiera, para mí tiene
+algo especial, porque me recuerda que tengo la
+suerte de compartir mi vida contigo.
+
+Gracias por tus sonrisas, tus abrazos, tus besitos,
+tus ocurrencias y hasta por esas pequeñas cosas
+que haces sin darte cuenta y que me enamoran
+cada día un poquito más. 🫶🏻
+
+No necesito que todos los días sean perfectos,
+porque mientras pueda compartirlos contigo,
+siempre habrá algo bonito que agradecer.
+Quiero seguir conociéndote, apoyándote en tus sueños,
+celebrando tus logros y recordándote lo increíble
+que eres. Estoy muy orgulloso de ti, mi niña. 🌷
+
+Si pudiera volver al principio, te volvería a elegir.
+Te elegiría en los días bonitos, en los difíciles,
+en los días de muchas risas y en aquellos en los
+que solo necesitemos un abrazo silencioso.
+
+Gracias por ser tú, por estar en mi vida y por
+permitirme formar parte de la tuya.
+Ojalá nos queden muchísimos días 15 por celebrar,
+muchas aventuras por vivir y muchos recuerdos
+que algún día nos hagan sonreír. 💞
+
+Te amo más de lo que a veces sé explicar con palabras.
+
+Con todo mi amor,
+tu niño que te ama muchísimo. 💌
+
+P. D. Tengo una pequeña sorpresa para ti... 🤭💕`;
+
+let indice = 0;
+const cajaTexto = document.getElementById("textoCarta");
+
+function escribirCarta() {
+    if (indice < mensaje.length) {
+        cajaTexto.textContent += mensaje.charAt(indice);
+        indice++;
+        setTimeout(escribirCarta, 24);
+    }
+}
+
+escribirCarta();
+
+function cambiarPantalla(id) {
+    document.querySelectorAll(".pantalla").forEach(p => {
+        p.classList.remove("activa");
+    });
+    document.getElementById(id).classList.add("activa");
+    window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+function mostrarPregunta() {
+    cambiarPantalla("preguntaPantalla");
+}
+
+function responderSi() {
+    cambiarPantalla("finalSi");
+    lluvia("💖");
+    lluvia("🥰");
+    lluvia("💕");
+}
+
+function responderNo() {
+    cambiarPantalla("finalNo");
+    lluvia("🥺");
+    lluvia("💔");
+    lluvia("🩷");
+}
+
+function lluvia(emoji) {
+    const fondo = document.getElementById("fondo");
+
+    for (let i = 0; i < 24; i++) {
+        const elemento = document.createElement("span");
+        elemento.className = "flotante";
+        elemento.textContent = emoji;
+        elemento.style.left = Math.random() * 100 + "%";
+        elemento.style.fontSize = (18 + Math.random() * 22) + "px";
+        elemento.style.animationDuration = (3 + Math.random() * 4) + "s";
+        elemento.style.animationDelay = (Math.random() * 2) + "s";
+
+        fondo.appendChild(elemento);
+        setTimeout(() => elemento.remove(), 8500);
+    }
+}
+
+// Corazoncitos ambientales
+setInterval(() => {
+    const fondo = document.getElementById("fondo");
+    const corazon = document.createElement("span");
+
+    corazon.className = "flotante";
+    corazon.textContent = ["♡", "💕", "💗", "✨"][
+        Math.floor(Math.random() * 4)
+    ];
+    corazon.style.left = Math.random() * 100 + "%";
+    corazon.style.fontSize = (14 + Math.random() * 15) + "px";
+    corazon.style.animationDuration = (6 + Math.random() * 5) + "s";
+
+    fondo.appendChild(corazon);
+    setTimeout(() => corazon.remove(), 12000);
+}, 650);
+</script>
+
+</body>
+</html>
